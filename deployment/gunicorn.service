@@ -1,0 +1,30 @@
+# /etc/systemd/system/prompt-exchange.service
+
+[Unit]
+Description=Gunicorn daemon for EarthRISE Prompt Exchange
+Requires=prompt-exchange.socket
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/srv/prompt-exchange
+
+# Load environment variables from .env file
+EnvironmentFile=/srv/prompt-exchange/.env
+
+ExecStart=/srv/prompt-exchange/venv/bin/gunicorn \
+    --workers 3 \
+    --bind unix:/run/prompt-exchange/gunicorn.sock \
+    --log-file /srv/prompt-exchange/logs/gunicorn.log \
+    --access-logfile /srv/prompt-exchange/logs/gunicorn-access.log \
+    nasa_prompts.wsgi:application
+
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+RuntimeDirectory=prompt-exchange
+
+[Install]
+WantedBy=multi-user.target

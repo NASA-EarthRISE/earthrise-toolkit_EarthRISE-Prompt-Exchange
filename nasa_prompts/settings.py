@@ -109,13 +109,18 @@ TIME_ZONE = 'America/New_York'  # NASA Goddard timezone
 USE_I18N = True
 USE_TZ = True
 
+# Sub-path deployment (e.g. /prompt-exchange in production, empty for local dev)
+SCRIPT_NAME = config('SCRIPT_NAME', default='')
+if SCRIPT_NAME:
+    FORCE_SCRIPT_NAME = SCRIPT_NAME
+
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
+STATIC_URL = SCRIPT_NAME + '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'prompts' / 'static']
 
 # Media files
-MEDIA_URL = 'media/'
+MEDIA_URL = SCRIPT_NAME + '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
@@ -173,6 +178,11 @@ MESSAGE_TAGS = {
 }
 
 # Security Settings (for production)
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS', default='',
+    cast=lambda v: [s.strip() for s in v.split(',') if s.strip()]
+)
+
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
@@ -183,6 +193,9 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+    # Reverse-proxy (nginx) support
+    USE_X_FORWARDED_HOST = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Email Configuration (for password reset, notifications, etc.)
 EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
