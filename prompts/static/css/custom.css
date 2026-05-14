@@ -1,0 +1,179 @@
+:root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --light-gray: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.navbar-dark.bg-primary {
+    background-color: var(--nasa-blue) !important;
+}
+
+.btn-primary {
+    background-color: var(--nasa-blue);
+    border-color: var(--nasa-blue);
+}
+
+.btn-primary:hover {
+    background-color: #0a2f6f;
+    border-color: #0a2f6f;
+}
+
+/* Logout button styling to match nav links */
+.navbar-nav .btn-link {
+    color: rgba(255, 255, 255, 0.55);
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.navbar-nav .btn-link:hover {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar-nav .btn-link:focus {
+    box-shadow: none;
+}
+
+.jumbotron {
+    background: linear-gradient(135deg, var(--nasa-blue) 0%, #1565c0 100%);
+    color: white;
+}
+
+.prompt-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.prompt-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.domain-card {
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.domain-card:hover {
+    border-color: var(--nasa-blue);
+    transform: scale(1.05);
+}
+
+.prompt-detail-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.prompt-text {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--nasa-blue);
+    padding: 20px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.comment-section {
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.comment-item {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Upvote button styles */
+.upvote-btn {
+    color: #6c757d;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.upvote-btn:hover:not(:disabled) {
+    color: var(--nasa-red);
+}
+
+.upvote-btn.active {
+    color: #ffffff;
+}
+
+.upvote-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.upvote-btn i {
+    font-size: 1.1rem;
+}
+
+.prompt-card .upvote-btn {
+    font-size: 0.9rem;
+}
+
+.favorite-btn.active {
+    color: #203c8f;
+}
+
+/* Loading animation */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .jumbotron {
+        padding: 2rem 1rem;
+    }
+
+    .jumbotron h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Alert styles */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Form styles */
+.form-control:focus {
+    border-color: var(--nasa-blue);
+    box-shadow: 0 0 0 0.2rem rgba(11, 61, 145, 0.25);
+}
+
+/* Card hover effects */
+.card {
+    border-radius: 8px;
+}
+
+.badge {
+    font-weight: 500;
+}
+
+/* Footer */
+footer {
+    border-top: 3px solid var(--nasa-blue);
+}

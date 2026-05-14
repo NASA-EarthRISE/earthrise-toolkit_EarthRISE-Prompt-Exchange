@@ -1,0 +1,152 @@
+{% extends 'prompts/base.html' %}
+
+{% block title %}Browse Prompts - EarthRISE Prompt Exchange{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="display-5">Browse Expert Prompts</h1>
+            <p class="lead text-muted">Discover and share AI prompts across EarthRISE domains</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            {% if user.is_authenticated %}
+            <a href="{% url 'prompt_create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Share New Prompt
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Filters Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="bi bi-funnel"></i> Filters
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Search -->
+                    <form method="get" action="{% url 'prompt_list' %}" class="mb-4">
+                        <label for="search-input" class="form-label"><strong>Search</strong></label>
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   id="search-input"
+                                   name="q"
+                                   value="{{ search_query }}"
+                                   placeholder="Search prompts...">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Domain Filter -->
+                    <div class="mb-4">
+                        <label class="form-label"><strong>Domains</strong></label>
+                        <div class="list-group">
+                            <a href="{% url 'prompt_list' %}?q={{ search_query }}&sort={{ current_sort }}"
+                               class="list-group-item list-group-item-action {% if not current_domain %}active{% endif %}">
+                                All Domains
+                            </a>
+                            {% for domain in domains %}
+                            <a href="{% url 'prompt_list' %}?domain={{ domain.slug }}&q={{ search_query }}&sort={{ current_sort }}"
+                               class="list-group-item list-group-item-action {% if current_domain == domain.slug %}active{% endif %}">
+                                {{ domain.name }}
+                                <span class="badge bg-secondary float-end">{{ domain.prompts.count }}</span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Sort Options -->
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Sort By</strong></label>
+                        <select class="form-select" id="sort-select" onchange="updateSort(this.value)">
+                            <option value="-created_at" {% if current_sort == '-created_at' %}selected{% endif %}>
+                                Newest First
+                            </option>
+                            <option value="created_at" {% if current_sort == 'created_at' %}selected{% endif %}>
+                                Oldest First
+                            </option>
+                            <option value="popular" {% if current_sort == 'popular' %}selected{% endif %}>
+                                Most Popular
+                            </option>
+                            <option value="title" {% if current_sort == 'title' %}selected{% endif %}>
+                                Alphabetical
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Clear Filters -->
+                    <a href="{% url 'prompt_list' %}" class="btn btn-outline-secondary btn-sm w-100">
+                        <i class="bi bi-x-circle"></i> Clear Filters
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prompts Grid -->
+        <div class="col-lg-9">
+            <!-- Results Info -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h5 class="mb-0">
+                        {% if search_query %}
+                            Search results for "{{ search_query }}"
+                        {% elif current_domain %}
+                            {{ domains|first }} Prompts
+                        {% else %}
+                            All Prompts
+                        {% endif %}
+                    </h5>
+                    <small class="text-muted">{{ prompts.count }} prompt{{ prompts.count|pluralize }} found</small>
+                </div>
+            </div>
+
+            <!-- Prompts -->
+            {% if prompts %}
+            <div class="row">
+                {% for prompt in prompts %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    {% include 'prompts/prompt_card.html' %}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <!-- No Results -->
+            <div class="text-center py-5">
+                <i class="bi bi-inbox display-1 text-muted"></i>
+                <h3 class="mt-3">No Prompts Found</h3>
+                <p class="text-muted">
+                    {% if search_query %}
+                        Try adjusting your search terms or filters.
+                    {% else %}
+                        Be the first to share a prompt in this domain!
+                    {% endif %}
+                </p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'prompt_create' %}" class="btn btn-primary mt-3">
+                    <i class="bi bi-plus-circle"></i> Share a Prompt
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function updateSort(sortValue) {
+    const url = new URL(window.location);
+    url.searchParams.set('sort', sortValue);
+    window.location = url.toString();
+}
+</script>
+{% endblock %}

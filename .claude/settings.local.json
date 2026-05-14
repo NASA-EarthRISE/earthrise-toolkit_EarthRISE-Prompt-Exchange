@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python manage.py migrate:*)",
+      "Bash(C:ProgramDataanaconda3envsnasa_promptsScriptspip install requests)",
+      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -m pip install requests)",
+      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" manage.py migrate)",
+      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -m pip install PyJWT cryptography)",
+      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" manage.py check)",
+      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -m pip show django-import-export)",
+      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -m pip install django-import-export)"
+    ]
+  }
+}

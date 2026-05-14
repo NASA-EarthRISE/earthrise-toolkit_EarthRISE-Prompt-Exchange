@@ -1,0 +1,66 @@
+{% extends 'prompts/base.html' %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="jumbotron bg-light p-5 rounded-3 mb-4">
+        <h1 class="display-4">Welcome to EarthRISE Prompt Exchange</h1>
+        <p class="lead">Share and discover expert AI prompts across EarthRISE domains. Collaborate with colleagues to improve productivity and knowledge sharing.</p>
+        <hr class="my-4">
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary btn-lg" href="{% url 'prompt_create' %}" role="button">
+            <i class="bi bi-plus-circle"></i> Share Your Expert Prompt
+        </a>
+        {% else %}
+        <a class="btn btn-primary btn-lg" href="{% url 'account_login' %}" role="button">Get Started</a>
+        {% endif %}
+    </div>
+
+    <!-- Domain Categories -->
+    <section class="mb-5">
+        <h2 class="mb-4">Browse by Domain</h2>
+        <div class="row">
+            {% for domain in domains %}
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'prompt_list' %}?domain={{ domain.slug }}" class="text-decoration-none">
+                    <div class="card h-100 domain-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-folder2-open fs-1 text-primary"></i>
+                            <h5 class="card-title mt-2">{{ domain.name }}</h5>
+                            <p class="card-text small text-muted">{{ domain.prompts.count }} prompts</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Recent Prompts -->
+    <section class="mb-5">
+        <h2 class="mb-4">Recently Shared</h2>
+        <div class="row">
+            {% for prompt in recent_prompts %}
+            <div class="col-md-4 mb-4">
+                {% include 'prompts/prompt_card.html' %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <a href="{% url 'prompt_list' %}" class="btn btn-outline-primary">View All Prompts</a>
+        </div>
+    </section>
+
+    <!-- Top Rated Prompts -->
+    <section class="mb-5">
+        <h2 class="mb-4">Most Popular</h2>
+        <div class="row">
+            {% for prompt in top_prompts %}
+            <div class="col-md-4 mb-4">
+                {% include 'prompts/prompt_card.html' %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
