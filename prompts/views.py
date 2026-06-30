@@ -7,9 +7,10 @@ from django.views.decorators.http import require_POST
 from .models import Prompt, Domain, Comment
 from .forms import PromptForm, CommentForm
 
+STATIC_VERSION = 1.0
 
 def access_denied(request):
-    return render(request, 'prompts/access_denied.html')
+    return render(request, 'prompts/access_denied.html', {'STATIC_VERSION': STATIC_VERSION})
 
 
 def home(request):
@@ -28,6 +29,7 @@ def home(request):
         'recent_prompts': recent_prompts,
         'top_prompts': top_prompts,
         'domains': domains,
+        'STATIC_VERSION': STATIC_VERSION,
     }
     return render(request, 'prompts/home.html', context)
 
@@ -67,6 +69,7 @@ def prompt_list(request):
         'search_query': search_query,
         'current_domain': domain_slug,
         'current_sort': sort_by,
+        'STATIC_VERSION': STATIC_VERSION,
     }
     return render(request, 'prompts/prompt_list.html', context)
 
@@ -102,6 +105,7 @@ def prompt_detail(request, slug):
         'comment_form': comment_form,
         'is_upvoted': is_upvoted,
         'is_favorited': is_favorited,
+        'STATIC_VERSION': STATIC_VERSION,
     }
     return render(request, 'prompts/prompt_detail.html', context)
 
@@ -120,7 +124,7 @@ def prompt_create(request):
     else:
         form = PromptForm()
 
-    return render(request, 'prompts/prompt_form.html', {'form': form, 'action': 'Create'})
+    return render(request, 'prompts/prompt_form.html', {'form': form, 'action': 'Create', 'STATIC_VERSION': STATIC_VERSION})
 
 
 @login_required
@@ -137,7 +141,7 @@ def prompt_edit(request, slug):
     else:
         form = PromptForm(instance=prompt)
 
-    return render(request, 'prompts/prompt_form.html', {'form': form, 'action': 'Edit', 'prompt': prompt})
+    return render(request, 'prompts/prompt_form.html', {'form': form, 'action': 'Edit', 'prompt': prompt, 'STATIC_VERSION': STATIC_VERSION})
 
 
 @login_required
@@ -150,7 +154,7 @@ def prompt_delete(request, slug):
         messages.success(request, 'Prompt deleted successfully!')
         return redirect('home')
 
-    return render(request, 'prompts/prompt_confirm_delete.html', {'prompt': prompt})
+    return render(request, 'prompts/prompt_confirm_delete.html', {'prompt': prompt, 'STATIC_VERSION': STATIC_VERSION})
 
 
 @login_required
@@ -218,6 +222,7 @@ def user_prompts(request):
         'my_prompts': my_prompts,
         'favorite_prompts': favorite_prompts,
         'total_upvotes': total_upvotes,
+        'STATIC_VERSION': STATIC_VERSION,
     }
     return render(request, 'prompts/user_prompts.html', context)
 
