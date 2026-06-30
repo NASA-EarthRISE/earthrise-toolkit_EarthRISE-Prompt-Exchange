@@ -3,16 +3,16 @@
 {% block content %}
 <div class="container">
     <!-- Hero Section -->
-    <div class="jumbotron bg-light p-5 rounded-3 mb-4">
+    <div class="jumbotron p-5 mb-4">
         <h1 class="display-4">Welcome to EarthRISE Prompt Exchange</h1>
         <p class="lead">Share and discover expert AI prompts across EarthRISE domains. Collaborate with colleagues to improve productivity and knowledge sharing.</p>
-        <hr class="my-4">
+        <hr class="my-4 border-light opacity-25">
         {% if user.is_authenticated %}
-        <a class="btn btn-primary btn-lg" href="{% url 'prompt_create' %}" role="button">
+        <a class="btn btn-light btn-lg" href="{% url 'prompt_create' %}" role="button">
             <i class="bi bi-plus-circle"></i> Share Your Expert Prompt
         </a>
         {% else %}
-        <a class="btn btn-primary btn-lg" href="{% url 'account_login' %}" role="button">Get Started</a>
+        <a class="btn btn-light btn-lg" href="{% url 'account_login' %}" role="button">Get Started</a>
         {% endif %}
     </div>
 

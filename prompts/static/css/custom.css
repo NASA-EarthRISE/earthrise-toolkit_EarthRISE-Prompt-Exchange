@@ -1,59 +1,192 @@
+/* ============================================================
+   Horizon Design System — EarthRISE Prompt Exchange
+   https://website.nasa.gov/horizon-design-system/
+   ============================================================ */
+
 :root {
-    --nasa-blue: #0B3D91;
-    --nasa-red: #FC3D21;
-    --light-gray: #f8f9fa;
+    /* Horizon color tokens */
+    --color-primary:   #0170B9;
+    --color-action:    #1c67e3;
+    --color-hover:     #f64137;
+    --color-dark:      #2e2e32;
+    --color-text:      #3a3a3a;
+    --color-text-meta: #58585b;
+    --color-bg:        #F5F5F5;
+    --color-surface:   #FFFFFF;
+    --color-border:    #dddddd;
+    --color-focus:     #444447;
+
+    /* Layout & component tokens */
+    --radius:          4px;
+    --shadow-card:     0px 0px 4px 0 rgba(0,0,0,0.34);
+    --shadow-menu:     0px 4px 10px -2px rgba(0,0,0,0.1);
+    --container:       1200px;
+    --font-body:       'Public Sans', sans-serif;
+    --font-heading:    'Inter', sans-serif;
+
+    /* Bootstrap primary override → Horizon primary blue */
+    --bs-primary:      #0170B9;
+    --bs-primary-rgb:  1, 112, 185;
 }
+
+/* ============================================================
+   Base
+   ============================================================ */
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-size: 16px;
+    line-height: 1.65;
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+}
+
+h1 { font-size: 36px; font-weight: 700; }
+h2 { font-size: 30px; font-weight: 500; }
+h3 { font-size: 24px; font-weight: 500; }
+
+/* ============================================================
+   Navigation
+   ============================================================ */
 
 .navbar-dark.bg-primary {
-    background-color: var(--nasa-blue) !important;
+    background-color: var(--color-dark) !important;
 }
 
-.btn-primary {
-    background-color: var(--nasa-blue);
-    border-color: var(--nasa-blue);
-}
-
-.btn-primary:hover {
-    background-color: #0a2f6f;
-    border-color: #0a2f6f;
-}
-
-/* Logout button styling to match nav links */
+/* Logout button styled as nav link */
 .navbar-nav .btn-link {
     color: rgba(255, 255, 255, 0.55);
     padding: 0.5rem 1rem;
     border: none;
     background: none;
     cursor: pointer;
+    font-family: var(--font-heading);
 }
 
 .navbar-nav .btn-link:hover {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .navbar-nav .btn-link:focus {
     box-shadow: none;
+    outline: none;
 }
 
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn-primary {
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    padding: 10px 24px;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--color-hover) !important;
+    border-color: var(--color-hover) !important;
+}
+
+.btn-outline-primary {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #ffffff;
+}
+
+.btn-secondary {
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+}
+
+.btn-outline-secondary {
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+}
+
+/* Dark-surface button (for use on --color-dark backgrounds) */
+.btn-dark-surface {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.85);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+}
+
+.btn-dark-surface:hover {
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+}
+
+/* ============================================================
+   Hero / Jumbotron
+   ============================================================ */
+
 .jumbotron {
-    background: linear-gradient(135deg, var(--nasa-blue) 0%, #1565c0 100%);
-    color: white;
+    background: var(--color-dark);
+    color: #ffffff;
+    border-radius: var(--radius) !important;
+}
+
+.jumbotron .btn-primary {
+    padding: 15px 30px;
+}
+
+/* ============================================================
+   Cards & Panels
+   ============================================================ */
+
+.card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+}
+
+.card-header {
+    border-radius: var(--radius) var(--radius) 0 0;
+    border-bottom: 1px solid var(--color-border);
+    font-family: var(--font-heading);
+}
+
+/* Dark card header (used for form cards, modals) */
+.card-header-dark,
+.card-header.bg-primary {
+    background-color: var(--color-dark) !important;
+    color: #ffffff !important;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .prompt-card {
     transition: transform 0.2s, box-shadow 0.2s;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .prompt-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .domain-card {
@@ -62,24 +195,35 @@ body {
 }
 
 .domain-card:hover {
-    border-color: var(--nasa-blue);
-    transform: scale(1.05);
+    border-color: var(--color-primary);
+    transform: scale(1.03);
 }
 
 .prompt-detail-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
 }
 
+/* Optional left accent bar for cards */
+.card-accent {
+    border-left: 4px solid var(--color-primary);
+}
+
+/* ============================================================
+   Prompt Text
+   ============================================================ */
+
 .prompt-text {
-    background-color: #f8f9fa;
-    border-left: 4px solid var(--nasa-blue);
+    background-color: var(--color-bg);
+    border-left: 4px solid var(--color-primary);
     padding: 20px;
-    border-radius: 4px;
+    border-radius: var(--radius);
     font-family: 'Courier New', monospace;
     white-space: pre-wrap;
     word-wrap: break-word;
+    color: var(--color-text);
 }
 
 .copy-button {
@@ -88,29 +232,38 @@ body {
     right: 10px;
 }
 
+/* ============================================================
+   Comments
+   ============================================================ */
+
 .comment-section {
-    background-color: var(--light-gray);
-    border-radius: 8px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
     padding: 20px;
 }
 
 .comment-item {
-    background: white;
-    border-radius: 6px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
     padding: 15px;
     margin-bottom: 15px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-menu);
 }
 
-/* Upvote button styles */
+/* ============================================================
+   Upvote / Favorite buttons
+   ============================================================ */
+
 .upvote-btn {
-    color: #6c757d;
+    color: var(--color-text-meta);
     transition: color 0.2s;
     cursor: pointer;
 }
 
 .upvote-btn:hover:not(:disabled) {
-    color: var(--nasa-red);
+    color: var(--color-hover);
 }
 
 .upvote-btn.active {
@@ -131,17 +284,129 @@ body {
 }
 
 .favorite-btn.active {
-    color: #203c8f;
+    color: var(--color-primary);
 }
 
-/* Loading animation */
+/* ============================================================
+   Form Inputs
+   ============================================================ */
+
+.form-control,
+.form-select {
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 14px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: var(--color-surface);
+    border-color: var(--color-focus);
+    outline: 1px dotted var(--color-focus);
+    box-shadow: none;
+}
+
+.form-label {
+    font-size: 11px;
+    color: var(--color-text-meta);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+.form-text {
+    color: var(--color-text-meta);
+    font-size: 12px;
+}
+
+/* ============================================================
+   Modals
+   ============================================================ */
+
+.modal-content {
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+}
+
+.modal-header {
+    background-color: var(--color-dark);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.modal-title {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.modal-body {
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.modal-footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* ============================================================
+   Alerts
+   ============================================================ */
+
+.alert {
+    border-radius: var(--radius);
+    border: none;
+}
+
+/* ============================================================
+   Badges
+   ============================================================ */
+
+.badge {
+    font-weight: 500;
+}
+
+.badge.bg-primary {
+    background-color: var(--color-primary) !important;
+}
+
+/* ============================================================
+   Loading spinner
+   ============================================================ */
+
 .spinner-border-sm {
     width: 1rem;
     height: 1rem;
     border-width: 0.15em;
 }
 
-/* Responsive adjustments */
+/* ============================================================
+   Footer
+   ============================================================ */
+
+footer {
+    border-top: 3px solid var(--color-primary);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
 @media (max-width: 768px) {
     .jumbotron {
         padding: 2rem 1rem;
@@ -150,30 +415,9 @@ body {
     .jumbotron h1 {
         font-size: 2rem;
     }
-}
 
-/* Alert styles */
-.alert {
-    border-radius: 8px;
-    border: none;
-}
-
-/* Form styles */
-.form-control:focus {
-    border-color: var(--nasa-blue);
-    box-shadow: 0 0 0 0.2rem rgba(11, 61, 145, 0.25);
-}
-
-/* Card hover effects */
-.card {
-    border-radius: 8px;
-}
-
-.badge {
-    font-weight: 500;
-}
-
-/* Footer */
-footer {
-    border-top: 3px solid var(--nasa-blue);
+    .btn-primary,
+    .btn-outline-primary {
+        padding: 10px 18px;
+    }
 }
