@@ -8,7 +8,25 @@
       "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -m pip install PyJWT cryptography)",
       "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" manage.py check)",
       "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -m pip show django-import-export)",
-      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -m pip install django-import-export)"
+      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -m pip install django-import-export)",
+      "Bash(dir \"C:\\\\Users\\\\washmall\\\\Documents\\\\websites\\\\earthrise-toolkit_EarthRISE-Prompt-Exchange\\\\nasa_prompts\")",
+      "Bash(node --version:*)",
+      "Bash(npm --version)",
+      "Bash(npx pa11y:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -c \"\nimport os, sys, django\nos.environ.setdefault\\(''DJANGO_SETTINGS_MODULE'', ''nasa_prompts.settings''\\)\nsys.path.insert\\(0, ''.''\\)\ndjango.setup\\(\\)\n\nfrom django.contrib.auth import get_user_model\nfrom django.contrib.sessions.backends.db import SessionStore\nfrom django.contrib.auth.models import Group\nimport json\n\nUser = get_user_model\\(\\)\n\n# Create or get test superuser\nemail = ''pa11y-test@test.local''\nuser, created = User.objects.get_or_create\\(email=email\\)\nif created:\n    user.is_superuser = True\n    user.is_staff = True\n    user.is_active = True\n    user.set_unusable_password\\(\\)\n    user.save\\(\\)\n    print\\(''Created test user''\\)\nelse:\n    print\\(''Test user exists''\\)\n\n# Ensure superuser flags are set\nuser.is_superuser = True\nuser.is_staff = True\nuser.save\\(\\)\n\n# Create session\ns = SessionStore\\(\\)\ns[''_auth_user_id''] = str\\(user.pk\\)\ns[''_auth_user_backend''] = ''allauth.account.auth_backends.AuthenticationBackend''\ns[''_auth_user_hash''] = user.get_session_auth_hash\\(\\)\ns.create\\(\\)\n\nprint\\(''SESSION_KEY='' + s.session_key\\)\n\")",
+      "Bash(SESSION_KEY=\"axww61baud4bsdm6g7yicjiglgvz2cjh\")",
+      "Bash(\"/c/ProgramData/anaconda3/envs/nasa_prompts/python.exe\" -c \"\nimport os, sys, django\nos.environ.setdefault\\(''DJANGO_SETTINGS_MODULE'', ''nasa_prompts.settings''\\)\nsys.path.insert\\(0, ''.''\\)\ndjango.setup\\(\\)\nfrom prompts.models import Prompt\nprompts = Prompt.objects.all\\(\\)[:3]\nfor p in prompts:\n    print\\(''/prompts/'' + p.slug + ''/''\\)\nif not prompts:\n    print\\(''NO_PROMPTS''\\)\n\")",
+      "Bash(npx pa11y-ci:*)",
+      "Bash(node -e:*)",
+      "Bash(npm root:*)",
+      "Bash(node run-pa11y.js:*)",
+      "Bash(npx puppeteer:*)",
+      "Bash(findstr:*)",
+      "Bash(CSRF=\"s054f6IqprIlRayF3uhyFABn4xT5J36dumVpchpSTBGYXOOPDzEVs8u09YwCt7s6\")",
+      "Bash(cat:*)",
+      "Bash(ls:*)"
     ]
   }
 }

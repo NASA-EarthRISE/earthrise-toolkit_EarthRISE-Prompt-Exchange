@@ -154,3 +154,5 @@ cython_debug/
 
 # Custom project logs
 logs/
+
+.claude

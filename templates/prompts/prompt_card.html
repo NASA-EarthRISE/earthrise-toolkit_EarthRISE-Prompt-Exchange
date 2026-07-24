@@ -5,21 +5,22 @@
             <small class="text-muted">
                 <button class="btn btn-sm btn-link p-0 text-decoration-none upvote-btn {% if user.is_authenticated and user in prompt.upvotes.all %}active{% endif %}"
                         data-slug="{{ prompt.slug }}"
+                        aria-label="Upvote {{ prompt.title }}"
                         {% if not user.is_authenticated %}disabled{% endif %}>
-                    <i class="bi bi-hand-thumbs-up{% if user.is_authenticated and user in prompt.upvotes.all %}-fill{% endif %}"></i>
+                    <i class="bi bi-hand-thumbs-up{% if user.is_authenticated and user in prompt.upvotes.all %}-fill{% endif %}" aria-hidden="true"></i>
                     <span class="upvote-count">{{ prompt.upvote_count }}</span>
                 </button>
             </small>
         </div>
-        <h5 class="card-title">
+        <h3 class="h5 card-title">
             <a href="{% url 'prompt_detail' prompt.slug %}" class="text-decoration-none text-dark">
                 {{ prompt.title }}
             </a>
-        </h5>
+        </h3>
         <p class="card-text text-muted small">{{ prompt.description|truncatewords:20 }}</p>
         <div class="d-flex justify-content-between align-items-center mt-3">
             <small class="text-muted">
-                <i class="bi bi-person"></i> {{ prompt.author.get_full_name|default:prompt.author.username }}
+                <i class="bi bi-person" aria-hidden="true"></i> {{ prompt.author.get_full_name|default:prompt.author.username }}
             </small>
             <small class="text-muted">{{ prompt.created_at|date:"M d, Y" }}</small>
         </div>

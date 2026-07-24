@@ -9,7 +9,7 @@
         <hr class="my-4 border-light opacity-25">
         {% if user.is_authenticated %}
         <a class="btn btn-light btn-lg" href="{% url 'prompt_create' %}" role="button">
-            <i class="bi bi-plus-circle"></i> Share Your Expert Prompt
+            <i class="bi bi-plus-circle" aria-hidden="true"></i> Share Your Expert Prompt
         </a>
         {% else %}
         <a class="btn btn-light btn-lg" href="{% url 'account_login' %}" role="button">Get Started</a>
@@ -25,8 +25,8 @@
                 <a href="{% url 'prompt_list' %}?domain={{ domain.slug }}" class="text-decoration-none">
                     <div class="card h-100 domain-card">
                         <div class="card-body text-center">
-                            <i class="bi bi-folder2-open fs-1 text-primary"></i>
-                            <h5 class="card-title mt-2">{{ domain.name }}</h5>
+                            <i class="bi bi-folder2-open fs-1 text-primary" aria-hidden="true"></i>
+                            <h3 class="h5 card-title mt-2">{{ domain.name }}</h3>
                             <p class="card-text small text-muted">{{ domain.prompts.count }} prompts</p>
                         </div>
                     </div>

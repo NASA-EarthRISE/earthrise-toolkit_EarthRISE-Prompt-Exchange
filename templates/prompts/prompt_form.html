@@ -9,10 +9,10 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">
-                        <i class="bi bi-{% if action == 'Create' %}plus-circle{% else %}pencil{% endif %}"></i>
+                    <h1 class="mb-0 h3">
+                        <i class="bi bi-{% if action == 'Create' %}plus-circle{% else %}pencil{% endif %}" aria-hidden="true"></i>
                         {{ action }} Expert Prompt
-                    </h3>
+                    </h1>
                 </div>
                 <div class="card-body">
                     <form method="post" novalidate>
@@ -54,7 +54,7 @@
                             {% if form.description.errors %}
                                 <div class="text-danger small">{{ form.description.errors }}</div>
                             {% endif %}
-                            <div class="form-text">Explain what this prompt does and when to use it</div>
+                            <div class="form-text" id="id_description_helptext">Explain what this prompt does and when to use it</div>
                         </div>
 
                         <!-- Prompt Text -->
@@ -67,7 +67,7 @@
                             {% if form.prompt_text.errors %}
                                 <div class="text-danger small">{{ form.prompt_text.errors }}</div>
                             {% endif %}
-                            <div class="form-text">
+                            <div class="form-text" id="id_prompt_text_helptext">
                                 Enter the complete prompt. Use placeholders like [TOPIC] or [DATA] where users should customize.
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                             {% if form.tags.errors %}
                                 <div class="text-danger small">{{ form.tags.errors }}</div>
                             {% endif %}
-                            <div class="form-text">Add comma-separated tags to help others find your prompt</div>
+                            <div class="form-text" id="id_tags_helptext">Add comma-separated tags to help others find your prompt</div>
                         </div>
 
                         <!-- Visibility -->
@@ -99,7 +99,7 @@
 
                         <!-- Important Notice -->
                         <div class="alert alert-warning">
-                            <h6><i class="bi bi-exclamation-triangle"></i> Important Data Restrictions</h6>
+                            <h2 class="h6"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i> Important Data Restrictions</h2>
                             <ul class="mb-0 small">
                                 <li>Do NOT include ITAR-controlled information</li>
                                 <li>Do NOT include Export Administration Regulations (EAR) data</li>
@@ -111,10 +111,10 @@
                         <!-- Action Buttons -->
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-check-circle"></i> {{ action }} Prompt
+                                <i class="bi bi-check-circle" aria-hidden="true"></i> {{ action }} Prompt
                             </button>
                             <a href="{% if prompt %}{% url 'prompt_detail' prompt.slug %}{% else %}{% url 'home' %}{% endif %}" class="btn btn-secondary">
-                                <i class="bi bi-x-circle"></i> Cancel
+                                <i class="bi bi-x-circle" aria-hidden="true"></i> Cancel
                             </a>
                         </div>
                     </form>
@@ -124,9 +124,9 @@
             <!-- Tips Card -->
             <div class="card mt-4 bg-light">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="bi bi-lightbulb-fill text-warning"></i> Tips for Great Prompts
-                    </h5>
+                    <h2 class="h5 card-title">
+                        <i class="bi bi-lightbulb-fill text-warning" aria-hidden="true"></i> Tips for Great Prompts
+                    </h2>
                     <ul class="mb-0">
                         <li>Be specific about the expected output format</li>
                         <li>Include context about your domain or use case</li>

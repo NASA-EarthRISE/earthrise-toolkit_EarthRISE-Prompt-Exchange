@@ -1,0 +1,22 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["axe", "htmlcs"],
+    "includeNotices": true,
+    "includeWarnings": true,
+    "timeout": 60000,
+    "wait": 1000,
+    "headers": {
+      "Cookie": "sessionid=axww61baud4bsdm6g7yicjiglgvz2cjh"
+    }
+  },
+  "urls": [
+    "http://localhost:8000/accounts/login/",
+    "http://localhost:8000/access-denied/",
+    "http://localhost:8000/",
+    "http://localhost:8000/prompts/",
+    "http://localhost:8000/prompts/solution-co-development-toolkit-web-app/",
+    "http://localhost:8000/prompts/create/",
+    "http://localhost:8000/my-prompts/"
+  ]
+}
