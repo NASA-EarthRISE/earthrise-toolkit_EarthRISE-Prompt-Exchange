@@ -470,5 +470,5 @@ To deploy at the root path (no sub-path), leave `SCRIPT_NAME` unset or empty and
 
 ## License
 
-The EarthRISE Toolkit is distributed by EarthRISE under the terms of the MIT License. See
+The EarthRISE Toolkit is distributed by EarthRISE under the terms of the GPLv3 License. See
 [LICENSE](https://github.com/NASA-EarthRISE/earthrise-toolkit_EarthRISE-Prompt-Exchange/blob/main/LICENSE) in this directory for more information.
